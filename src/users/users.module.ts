@@ -9,6 +9,12 @@ import { RolesController } from './controllers/roles.controller';
 import { RolesService } from './services/roles.service';
 import { UsersController } from './controllers/users.controller';
 import { UsersService } from './services/users.service';
+import { DoctorsService } from './services/doctors.service';
+import { DoctorsController } from './controllers/doctors.controller';
+import { SpecialtiesController } from './controllers/specialties.controller';
+import { PatientsController } from './controllers/patients.controller';
+import { SpecialtiesService } from './services/specialties.service';
+import { PatientsService } from './services/patients.service';
 
 @Module({
     imports: [
@@ -21,16 +27,25 @@ import { UsersService } from './services/users.service';
         ])
     ],
     controllers: [
-        // UsersController,
         UsersController,
-        // RolesController,
-        RolesController
+        RolesController,
+        DoctorsController,
+        SpecialtiesController,
+        PatientsController,
     ],
     providers: [
-        // UsersService,
         UsersService,
-        // RolesService,
-        RolesService
+        RolesService,
+        DoctorsService,
+        SpecialtiesService,
+        PatientsService,
+    ],
+    exports: [
+        UsersService,
+        RolesService,
+        DoctorsService,
+        SpecialtiesService,
+        PatientsService,
     ]
 })
 export class UsersModule {}
