@@ -2,7 +2,7 @@ import {Entity, Column, ManyToOne, JoinColumn, OneToOne, OneToMany} from 'typeor
 import {BaseEntityCustom} from '../../shared/entities/base.entity';
 import {Doctor} from '../../users/entities/doctor.entity';
 import {Patient} from '../../users/entities/patient.entity';
-import { Consultation } from 'src/medical-records/entities/consultation.entity';
+import { Consultation } from '../../medical-records/entities/consultation.entity';
 import { AppointmentHistory } from './appointment-history.entity';
 import { Service } from './service.entity';
 

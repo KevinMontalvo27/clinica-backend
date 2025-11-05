@@ -5,7 +5,7 @@ import {
   ConflictException
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, Between, LessThanOrEqual, MoreThanOrEqual } from 'typeorm';
+import { Repository, Between, LessThanOrEqual, MoreThanOrEqual, DataSource } from 'typeorm';
 import { Appointment } from '../entities/appointment.entity';
 import { AppointmentHistory } from '../entities/appointment-history.entity';
 import { CreateAppointmentDto } from '../dtos/create-appointment.dto';
@@ -14,6 +14,8 @@ import { UpdateAppointmentStatusDto, AppointmentStatus } from '../dtos/update-ap
 import { RescheduleAppointmentDto } from '../dtos/reschedule-appointment.dto';
 import { CancelAppointmentDto } from '../dtos/cancel-appointment.dto';
 import { AppointmentQueryDto } from '../dtos/appointment-query.dto';
+import { Doctor } from '../../users/entities/doctor.entity';
+import { Patient } from '../../users/entities/patient.entity';
 
 @Injectable()
 export class AppointmentsService {
@@ -22,6 +24,11 @@ export class AppointmentsService {
     private readonly appointmentRepository: Repository<Appointment>,
     @InjectRepository(AppointmentHistory)
     private readonly appointmentHistoryRepository: Repository<AppointmentHistory>,
+    @InjectRepository(Doctor)
+    private doctorsRepository: Repository<Doctor>,
+    @InjectRepository(Patient)
+    private patientsRepository: Repository<Patient>,
+    private dataSource: DataSource,
   ) {}
 
   /**
