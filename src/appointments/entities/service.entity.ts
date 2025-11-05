@@ -1,5 +1,5 @@
-import { BaseEntityCustom } from "src/shared/entities/base.entity";
-import { Doctor } from "src/users/entities/doctor.entity";
+import { BaseEntityCustom } from "../../shared/entities/base.entity";
+import { Doctor } from "../../users/entities/doctor.entity";
 import { Column, Entity, JoinColumn, ManyToOne } from "typeorm";
 
 

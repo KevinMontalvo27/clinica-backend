@@ -4,9 +4,9 @@ import { User } from './users.entity';
 import { Specialty } from './specialty.entity';
 import { Appointment } from '../../appointments/entities/appointment.entity';
 import { DoctorSchedule } from '../../appointments/entities/doctor-schedule.entity';
-import { ScheduleException } from 'src/appointments/entities/schedule-exception.entity';
-import { Consultation } from 'src/medical-records/entities/consultation.entity';
-import { Service } from 'src/appointments/entities/service.entity';
+import { ScheduleException } from '../../appointments/entities/schedule-exception.entity';
+import { Consultation } from '../../medical-records/entities/consultation.entity';
+import { Service } from '../../appointments/entities/service.entity';
 
 @Entity('doctors')
 export class Doctor extends BaseEntityCustom {

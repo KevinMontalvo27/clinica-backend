@@ -1,6 +1,6 @@
 import { Entity, Column, ManyToOne, JoinColumn } from 'typeorm';
 import { BaseEntityCustom } from '../../shared/entities/base.entity';
-import { Doctor } from 'src/users/entities/doctor.entity';
+import { Doctor } from '../../users/entities/doctor.entity';
 
 @Entity('schedule_exceptions')
 export class ScheduleException extends BaseEntityCustom {

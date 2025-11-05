@@ -2,8 +2,8 @@ import { Entity, Column, OneToOne, JoinColumn, OneToMany } from 'typeorm';
 import { BaseEntityCustom } from '../../shared/entities/base.entity';
 import { User } from './users.entity';
 import { Appointment } from '../../appointments/entities/appointment.entity';
-import { MedicalRecord } from 'src/medical-records/entities/medical-record.entity';
-import { Consultation } from 'src/medical-records/entities/consultation.entity';
+import { MedicalRecord } from '../../medical-records/entities/medical-record.entity';
+import { Consultation } from '../../medical-records/entities/consultation.entity';
 
 
 @Entity('patients')

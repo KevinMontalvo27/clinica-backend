@@ -1,7 +1,7 @@
-import { BaseEntityCustom } from "src/shared/entities/base.entity";
+import { BaseEntityCustom } from "../../shared/entities/base.entity";
 import { Column, Entity, JoinColumn, ManyToOne } from "typeorm";
 import { Appointment } from "./appointment.entity";
-import { User } from "src/users/entities/users.entity";
+import { User } from "../../users/entities/users.entity";
 
 
 @Entity('appointment_history')
@@ -39,11 +39,11 @@ export class AppointmentHistory extends BaseEntityCustom {
     reason: string;
 
     //Quien realizo el cambio
-    @ManyToOne(() => User)
-    @JoinColumn({ name: 'changedById' })
+    @ManyToOne(() => User, {nullable: true})
+    @JoinColumn({ name: 'changedById'})
     changedBy: User;
 
-    @Column()
+    @Column({nullable: true})
     changedById: string;
 
     //Fecha del cambio
