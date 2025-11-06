@@ -68,7 +68,7 @@ export class AppointmentsService {
     const savedAppointment = await this.appointmentRepository.save(newAppointment);
 
     // Registrar en el historial
-    if (changedById) {
+        if (changedById && changedById !== 'system') {
       await this.createHistoryRecord(
         savedAppointment.id,
         null,
@@ -321,17 +321,19 @@ export class AppointmentsService {
     await this.appointmentRepository.save(appointment);
 
     // Registrar en el historial
-    await this.createHistoryRecord(
-      id,
-      appointment.appointmentDate,
-      appointment.appointmentTime,
-      appointment.appointmentDate,
-      appointment.appointmentTime,
-      previousStatus,
-      updateStatusDto.status,
-      updateStatusDto.reason || `Estado cambiado a ${updateStatusDto.status}`,
-      changedById
-    );
+    if (changedById && changedById !== 'system') {
+      await this.createHistoryRecord(
+        id,
+        appointment.appointmentDate,
+        appointment.appointmentTime,
+        appointment.appointmentDate,
+        appointment.appointmentTime,
+        previousStatus,
+        updateStatusDto.status,
+        updateStatusDto.reason || `Estado cambiado a ${updateStatusDto.status}`,
+        changedById
+      );
+    }
 
     return await this.findById(id);
   }
@@ -374,17 +376,19 @@ export class AppointmentsService {
     await this.appointmentRepository.save(appointment);
 
     // Registrar en el historial
-    await this.createHistoryRecord(
-      id,
-      previousDate,
-      previousTime,
-      rescheduleDto.newDate,
-      rescheduleDto.newTime,
-      previousStatus,
-      'RESCHEDULED',
-      rescheduleDto.reason || 'Cita reagendada',
-      changedById
-    );
+        if (changedById && changedById !== 'system') {
+      await this.createHistoryRecord(
+        id,
+        previousDate,
+        previousTime,
+        rescheduleDto.newDate,
+        rescheduleDto.newTime,
+        previousStatus,
+        'RESCHEDULED',
+        rescheduleDto.reason || 'Cita reagendada',
+        changedById
+      );
+    }
 
     return await this.findById(id);
   }
@@ -416,18 +420,19 @@ export class AppointmentsService {
     await this.appointmentRepository.save(appointment);
 
     // Registrar en el historial
-    await this.createHistoryRecord(
-      id,
-      appointment.appointmentDate,
-      appointment.appointmentTime,
-      appointment.appointmentDate,
-      appointment.appointmentTime,
-      previousStatus,
-      'CANCELLED',
-      cancelDto.reason,
-      changedById
-    );
-
+    if (changedById && changedById !== 'system') {
+      await this.createHistoryRecord(
+        id,
+        appointment.appointmentDate,
+        appointment.appointmentTime,
+        appointment.appointmentDate,
+        appointment.appointmentTime,
+        previousStatus,
+        'CANCELLED',
+        cancelDto.reason,
+        changedById
+      );
+    }
     return await this.findById(id);
   }
 
@@ -525,31 +530,37 @@ export class AppointmentsService {
   /**
  * Crea un registro en el historial de citas
  */
-private async createHistoryRecord(
-  appointmentId: string,
-  previousDate: Date | null,
-  previousTime: string | null,
-  newDate: Date,
-  newTime: string,
-  previousStatus: string | null,
-  newStatus: string,
-  reason: string,
-  changedById: string
-): Promise<void> {
-  const history = this.appointmentHistoryRepository.create({
-    appointmentId,
-    previousDate,
-    previousTime,
-    newDate,
-    newTime,
-    previousStatus,
-    newStatus,
-    reason,
-    changedById,
-  } as any);
+  private async createHistoryRecord(
+    appointmentId: string,
+    previousDate: Date | null,
+    previousTime: string | null,
+    newDate: Date,
+    newTime: string,
+    previousStatus: string | null,
+    newStatus: string,
+    reason: string,
+    changedById: string
+  ): Promise<void> {
 
-  await this.appointmentHistoryRepository.save(history);
-}
+    const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    if (!uuidRegex.test(changedById)) {
+        console.warn(`⚠️ Historial no creado: changedById "${changedById}" no es un UUID válido`);
+        return;
+    }
+    const history = this.appointmentHistoryRepository.create({
+      appointmentId,
+      previousDate,
+      previousTime,
+      newDate,
+      newTime,
+      previousStatus,
+      newStatus,
+      reason,
+      changedById,
+    } as any);
+
+    await this.appointmentHistoryRepository.save(history);
+  }
 
   /**
    * Obtiene el historial de una cita
