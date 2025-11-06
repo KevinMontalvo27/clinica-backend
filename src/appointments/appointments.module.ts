@@ -5,18 +5,18 @@ import { DoctorSchedule } from './entities/doctor-schedule.entity';
 import { ScheduleException } from './entities/schedule-exception.entity';
 import { AppointmentHistory } from './entities/appointment-history.entity';
 import { Service } from './entities/service.entity';
-
 import { AppointmentsController } from './controllers/appointments.controller';
 import { DoctorSchedulesController } from './controllers/doctor-schedule.controller';
 import { ScheduleExceptionsController } from './controllers/schedule-exceptions.controller';
 import { AvailabilityController } from './controllers/availability.controller';
 import { ServicesController } from './controllers/services.controller';
-
 import { AppointmentsService } from './services/appointments.service';
 import { DoctorSchedulesService } from './services/doctor-schedules.service';
 import { ScheduleExceptionsService } from './services/schedule-exceptions.service';
 import { AvailabilityService } from './services/availability.service';
 import { ServicesService } from './services/services.service';
+import { Doctor } from '../users/entities/doctor.entity';
+import { Patient } from '../users/entities/patient.entity';
 
 @Module({
   imports: [
@@ -26,6 +26,8 @@ import { ServicesService } from './services/services.service';
       ScheduleException,
       AppointmentHistory,
       Service,
+      Doctor,
+      Patient,
     ])
   ],
   controllers: [
