@@ -47,6 +47,8 @@ export class PatientsService {
         bloodType: createPatientDto.bloodType,
         });
 
+        
+
         return await this.patientRepository.save(patient);
     }
 

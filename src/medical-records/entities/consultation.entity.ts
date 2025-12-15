@@ -44,7 +44,7 @@ export class Consultation extends BaseEntityCustom {
     @Column({ type: 'int', nullable: true })
     heartRate: number; //Frecuencia cardiaca
 
-    @Column({ type: 'int', nullable: true })
+    @Column({ type: 'decimal', nullable: true })
     temperature: number; 
 
     //Consulta

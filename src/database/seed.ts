@@ -16,7 +16,7 @@ import { Patient } from '../users/entities/patient.entity';
 import { Specialty } from '../users/entities/specialty.entity';
 
 async function seed() {
-  console.log('🌱 Iniciando seed de la base de datos...\n');
+  console.log('Iniciando seed de la base de datos...\n');
 
   const app = await NestFactory.createApplicationContext(AppModule);
 
