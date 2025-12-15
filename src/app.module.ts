@@ -8,6 +8,7 @@ import { SharedModule } from './shared/shared.module';
 import databaseConfig from './config/database.config';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AIModule } from './ai/ai.module';
 
 @Module({
   imports: [
@@ -33,7 +34,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     AppointmentsModule, 
     MedicalRecordsModule, 
     PaymentsModule, 
-    SharedModule],
+    SharedModule, AIModule],
   controllers: [],
   providers: [],
 })

@@ -15,6 +15,6 @@ export default registerAs(
         __dirname + '/../**/*.entity{.ts,.js}' // ← Esto debería encontrar tus archivos
         ],
         synchronize: true,
-        logging: true, 
+        logging: false, 
     })
 );
